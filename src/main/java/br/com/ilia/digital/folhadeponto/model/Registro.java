@@ -5,16 +5,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Registro {
     private String dia;
+    
+    // @JsonInclude(JsonInclude.Include.NON_NULL)
     private List <String> horarios = new ArrayList <String> ();
+    
+    // @JsonInclude(JsonInclude.Include.NON_NULL)
     private List <Alocacao> alocacoes = new ArrayList <Alocacao> ();
 
     // public Registro () {}
 
-    public Registro (@JsonProperty ("name") String dateTime) {
+    public Registro (@JsonProperty ("dataHora") String dateTime) {
         String day = LocalDateTime.parse(dateTime).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String horario = LocalDateTime.parse(dateTime).format(DateTimeFormatter.ofPattern("HH:mm:SS"));
 
