@@ -13,27 +13,27 @@ public class Alocacao {
         this.nomeProjeto = nomeProjeto;
     }
 
-    public String getDate() {
+    public String getDate () {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate (String date) {
         this.date = date;
     }
 
-    public String getTempo() {
+    public String getTempo () {
         return tempo;
     }
 
-    public void setTempo(String tempo) {
+    public void setTempo (String tempo) {
         this.tempo = tempo;
     }
 
-    public String getNomeProjeto() {
+    public String getNomeProjeto () {
         return nomeProjeto;
     }
 
-    public void setNomeProjeto(String nomeProjeto) {
+    public void setNomeProjeto (String nomeProjeto) {
         this.nomeProjeto = nomeProjeto;
     }
 
