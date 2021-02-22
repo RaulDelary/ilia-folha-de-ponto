@@ -3,24 +3,27 @@ package br.com.ilia.digital.folhadeponto.dao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
+import br.com.ilia.digital.folhadeponto.model.Alocacao;
 import br.com.ilia.digital.folhadeponto.model.Registro;
 
 @Repository
-public class InMemoryDb implements RegistroDao {
+public class InMemoryDb implements RegistroDao, AlocacaoDao {
 
-    public static List <Registro> db = new ArrayList <Registro> ();
+    public static List <Registro> registros = new ArrayList <Registro> ();
+    public static List <Alocacao> alocacoes = new ArrayList <Alocacao> ();
 
     @Override
     public List <Registro> getAllRegistros () {
-        return InMemoryDb.db;
+        return InMemoryDb.registros;
     }
 
     @Override
     public Optional <Registro> getRegistroByDate (String date) {
-        return InMemoryDb.db.stream ()
+        return InMemoryDb.registros.stream ()
                             .filter (reg -> reg.getDia ().equals (date))
                             .findFirst ();
         
@@ -28,7 +31,7 @@ public class InMemoryDb implements RegistroDao {
 
     @Override
     public Registro insertRegistro (Registro theRegistro) {
-        InMemoryDb.db.add (theRegistro);
+        InMemoryDb.registros.add (theRegistro);
         return theRegistro;
     }
 
@@ -40,17 +43,23 @@ public class InMemoryDb implements RegistroDao {
             return null;
         }
 
-        InMemoryDb.db.set (InMemoryDb.db.indexOf (registro.get ()), theRegistro);
+        InMemoryDb.registros.set (InMemoryDb.registros.indexOf (registro.get ()), theRegistro);
 
         return registro.get ();
         
     }
 
-    public static List<Registro> getDb () {
-        return db;
+    @Override
+    public Alocacao insertAlocacao(Alocacao theAlocacao) {
+        InMemoryDb.alocacoes.add (theAlocacao);
+        return null;
     }
 
-    public static void setDb (List <Registro> db) {
-        InMemoryDb.db = db;
+    @Override
+    public List<Alocacao> getAlocacoesOfDate(String theDate) {
+        return InMemoryDb.alocacoes.stream ()
+                                   .filter (aloc -> aloc.getDate ().equals (theDate))
+                                   .collect (Collectors.toList ());
     }
+
 }

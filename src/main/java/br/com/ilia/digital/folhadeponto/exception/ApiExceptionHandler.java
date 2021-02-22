@@ -27,7 +27,7 @@ public class ApiExceptionHandler {
     public ResponseEntity <Object> handleTimeAlreadyRegisteredException (TimeAlreadyRegisteredException e) {
         ApiException apiException = new ApiException (e.getMessage ());
 
-        return new ResponseEntity<Object> (apiException, HttpStatus.CONFLICT);
+        return new ResponseEntity <Object> (apiException, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler (value = {HttpMessageNotReadableException.class})
@@ -35,7 +35,21 @@ public class ApiExceptionHandler {
         ApiException apiException = new ApiException ("Data e hora em formato inválido");
 
 
-        return new ResponseEntity <>(apiException, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity <Object> (apiException, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler (value = {TimesNotRegisteredException.class})
+    public ResponseEntity <Object> handleTimesNotRegisteredException (TimesNotRegisteredException e) {
+        ApiException apiException = new ApiException (e.getMessage ());
+
+        return new ResponseEntity <Object> (apiException, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler (value = {TimeRangeException.class})
+    public ResponseEntity <Object> hangleTimeRangeException (TimeRangeException e) {
+        ApiException apiException = new ApiException (e.getMessage ());
+
+        return new ResponseEntity <Object> (apiException, HttpStatus.BAD_REQUEST);
     }
 
 }

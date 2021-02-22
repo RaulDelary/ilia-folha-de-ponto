@@ -20,7 +20,7 @@ public class RegistroService {
     public RegistroService (RegistroDao registroDao) {
         this.registroDao = registroDao;
     }
-    
+
     public Registro saveRegistro (Registro theRegistro) {
         Optional <Registro> registro = registroDao.getRegistroByDate (theRegistro.getDia ());
 
@@ -35,7 +35,7 @@ public class RegistroService {
                     throw new TimeAlreadyRegisteredException ("Este horário já está cadastrado para esta data.");
                 }
             } else {
-                throw new AllTimesRegisteredException ("Todos os horários para esta data já foram cadastrados");
+                throw new AllTimesRegisteredException ("Todos os horários para esta data já foram cadastrados.");
             }
         }
 
@@ -46,7 +46,7 @@ public class RegistroService {
         Optional <Registro> registro = registroDao.getRegistroByDate (theDate);
 
         if (registro.isEmpty ()) {
-            throw new NotFoundException ("Registro não encontrado");
+            throw new NotFoundException ("Registro não encontrado para esta data.");
         }
 
         return registro.get ();
@@ -56,7 +56,7 @@ public class RegistroService {
         List <Registro> registros = registroDao.getAllRegistros ();
         
         if (registros.isEmpty ()) {
-            throw new NotFoundException ("Não há registros cadastrados");
+            throw new NotFoundException ("Não há registros cadastrados.");
         }
 
         return registros;

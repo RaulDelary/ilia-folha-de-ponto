@@ -32,7 +32,7 @@ public class RegistroController {
         return registroService.getAllRegistros ();
     }
 
-    @GetMapping (path = "/batida/{data}")
+    @GetMapping (path = "/batida/{date}")
     public Registro getRegistroBydDate (@PathVariable String date) {
        return registroService.getRegistroByDate (date);
     }

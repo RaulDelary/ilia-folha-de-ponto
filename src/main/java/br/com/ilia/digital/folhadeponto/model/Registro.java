@@ -3,6 +3,7 @@ package br.com.ilia.digital.folhadeponto.model;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,9 +13,6 @@ public class Registro {
     
     // @JsonInclude(JsonInclude.Include.NON_NULL)
     private List <String> horarios = new ArrayList <String> ();
-    
-    // @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List <Alocacao> alocacoes = new ArrayList <Alocacao> ();
 
     public Registro () {}
 
@@ -49,10 +47,7 @@ public class Registro {
 
     public void addHorario (String horario) {
         this.horarios.add (horario);
-    }
-
-    public void addAlocacao (Alocacao alocacao) {
-        this.alocacoes.add (alocacao);
+        Collections.sort(this.horarios);
     }
     
 }
