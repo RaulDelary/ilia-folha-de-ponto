@@ -75,7 +75,7 @@ components:
                 type: string
                 example: PT69H35M5S
 paths:
-  /v1/batidas:
+  /v1/batida:
     post:
       summary: "Bater ponto"
       description: "Registrar um horário da jornada diária de trabalho"
@@ -135,7 +135,7 @@ paths:
                 Horário já registrado:
                   value:
                     mensagem: Horários já registrado
-  /v1/alocacoes:
+  /v1/alocacao:
     post:
       summary: "Alocar horas trabalhadas"
       description: "Alocar horas trabalhadas, de um dia de trabalho, em um projeto"
@@ -164,7 +164,7 @@ paths:
                 alocar tempo maior que o tempo trabalhado no dia:
                   value:
                     mensagem: Não pode alocar tempo maior que o tempo trabalhado no dia
-  /v1/folhas-de-ponto/{mes}:
+  /v1/folha-de-ponto/{mes}:
     get:
       summary: "Relatório mensal"
       description: "Geração de relatório mensal de usuário."
