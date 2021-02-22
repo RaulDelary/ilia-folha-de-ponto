@@ -62,4 +62,19 @@ public class InMemoryDb implements RegistroDao, AlocacaoDao {
                                    .collect (Collectors.toList ());
     }
 
+    @Override
+    public List<Registro> getRegistrosByMonth(String month) {
+        return InMemoryDb.registros.stream ()
+                                   .filter (reg -> reg.getDia ().substring (0, 7).equals (month))
+                                   .collect (Collectors.toList ());
+
+    }
+
+    @Override
+    public List<Alocacao> getAlocacoesOfMonth(String month) {
+        return InMemoryDb.alocacoes.stream ()
+                                   .filter (aloc -> aloc.getDate ().substring (0, 7).equals (month))
+                                   .collect (Collectors.toList ());
+    }
+
 }

@@ -28,16 +28,26 @@ public class AlocacaoService {
     public Alocacao saveAlocacao (Alocacao theAlocacao) {
         // Haverá exception se não encontrar o registro com a data informada
         Registro registro = registroService.getRegistroByDate (theAlocacao.getDate ());
+        long firstPeriod = 0L;
+        long secondPeriod = 0L;
 
-        if (registro.getHorarios ().size () < 4) {
+        if (registro.getHorarios ().size () == 4) {
+
+            firstPeriod = LocalTime.parse (registro.getHorarios ().get (1)).getLong (ChronoField.SECOND_OF_DAY) - 
+                          LocalTime.parse (registro.getHorarios ().get (0)).getLong (ChronoField.SECOND_OF_DAY);
+
+            secondPeriod = LocalTime.parse (registro.getHorarios ().get (3)).getLong (ChronoField.SECOND_OF_DAY) - 
+                           LocalTime.parse (registro.getHorarios ().get (2)).getLong (ChronoField.SECOND_OF_DAY);
+
+        } else if (registro.getHorarios ().size () >= 2) {
+            
+            firstPeriod = LocalTime.parse (registro.getHorarios ().get (1)).getLong (ChronoField.SECOND_OF_DAY) - 
+                          LocalTime.parse (registro.getHorarios ().get (0)).getLong (ChronoField.SECOND_OF_DAY);
+            
+        } else {
+
             throw new TimesNotRegisteredException("Os horários desta data ainda não foram todos cadastrados cadastrados.");
         }
-
-        Long firstPeriod = LocalTime.parse (registro.getHorarios ().get (1)).getLong (ChronoField.SECOND_OF_DAY) - 
-                           LocalTime.parse (registro.getHorarios ().get (0)).getLong (ChronoField.SECOND_OF_DAY);
-
-        Long secondPeriod = LocalTime.parse (registro.getHorarios ().get (3)).getLong (ChronoField.SECOND_OF_DAY) - 
-                            LocalTime.parse (registro.getHorarios ().get (2)).getLong (ChronoField.SECOND_OF_DAY);
 
         Duration totalWorkedTime = Duration.ofSeconds(firstPeriod + secondPeriod);
 

@@ -2,6 +2,8 @@ package br.com.ilia.digital.folhadeponto.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,17 +25,19 @@ public class RegistroController {
     }
 
     @PostMapping (path = "/batida")
-    public Registro addRegistro (@RequestBody Registro theRegistro) {
-        return registroService.saveRegistro (theRegistro);
+    public ResponseEntity <Registro> addRegistro (@RequestBody Registro theRegistro) {
+        
+        return new ResponseEntity <Registro> (registroService.saveRegistro (theRegistro), HttpStatus.CREATED);
     }
 
     @GetMapping (path = "/batidas")
-    public List<Registro> getRegistros () {
-        return registroService.getAllRegistros ();
+    public ResponseEntity <List <Registro>> getRegistros () {
+        return new ResponseEntity <List <Registro>> (registroService.getAllRegistros (), HttpStatus.OK);
     }
 
     @GetMapping (path = "/batida/{date}")
-    public Registro getRegistroBydDate (@PathVariable String date) {
-       return registroService.getRegistroByDate (date);
+    public ResponseEntity <Registro> getRegistroBydDate (@PathVariable String date) {
+       return new ResponseEntity <Registro> (registroService.getRegistroByDate (date), HttpStatus.OK);
     }
+
 }

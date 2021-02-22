@@ -8,5 +8,6 @@ public interface AlocacaoDao {
 
     public Alocacao insertAlocacao (Alocacao theAlocacao);
     public List <Alocacao> getAlocacoesOfDate (String date);
+    public List <Alocacao> getAlocacoesOfMonth (String month);
 
 }

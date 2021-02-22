@@ -8,7 +8,8 @@ import br.com.ilia.digital.folhadeponto.model.Registro;
 public interface RegistroDao {
     
     public Registro insertRegistro (Registro theRegistro);
-    public Optional <Registro> getRegistroByDate (String month);
+    public Optional <Registro> getRegistroByDate (String date);
+    public List <Registro> getRegistrosByMonth (String month);
     public List <Registro> getAllRegistros ();
     public Registro updateRegistro (Registro theRegistro);
 }

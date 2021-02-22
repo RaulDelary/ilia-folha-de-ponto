@@ -18,7 +18,7 @@ public class Registro {
 
     public Registro (@JsonProperty ("dataHora") String dateTime) {
         String day = LocalDateTime.parse (dateTime).format (DateTimeFormatter.ofPattern ("yyyy-MM-dd"));
-        String horario = LocalDateTime.parse (dateTime).format (DateTimeFormatter.ofPattern ("HH:mm:SS"));
+        String horario = LocalDateTime.parse (dateTime).format (DateTimeFormatter.ofPattern ("HH:mm:ss"));
 
         this.dia = day;
         this.horarios.add (horario);
